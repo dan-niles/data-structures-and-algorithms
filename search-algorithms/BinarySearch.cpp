@@ -1,4 +1,4 @@
-// Worst complexity: O(log n)
+// Time complexity: O(log n)
 // Space complexity: O(1)
 
 // Binary search is an efficient algorithm for finding an item from a sorted list of items.

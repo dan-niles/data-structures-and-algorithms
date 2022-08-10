@@ -1,3 +1,9 @@
+// Time complexity: O(n*log(n))
+// Space complexity: O(n)
+
+// The Merge Sort algorithm is a sorting algorithm that is considered an example of the divide and conquer strategy.
+// So, in this algorithm, the array is initially divided into two equal halves and then they are combined in a sorted manner.
+
 #include <iostream>
 using namespace std;
 
@@ -12,27 +18,30 @@ void printArray(int A[], int length, string prefix = "")
     cout << "]" << endl;
 }
 
-void merge(int A[], int p, int q, int r)
+// Time Complexity: O(n)
+void merge(int A[], int left, int mid, int right)
 {
     int n1, n2;
-    n1 = q - p + 1;
-    n2 = r - q;
+    n1 = mid - left + 1; // No of elements in first half
+    n2 = right - mid;    // No of elements in second half
 
-    int L[n1], R[n2];
+    int L[n1], R[n2]; // Create two arrays to store both halves seperately
     int i, j, k;
+
+    // Copy values from first half of array into L
     for (i = 0; i < n1; i++)
-    {
-        L[i] = A[p + i];
-    }
+        L[i] = A[left + i];
+
+    // Copy values from second half of array into R
     for (j = 0; j < n2; j++)
-    {
-        R[j] = A[q + j + 1];
-    }
+        R[j] = A[mid + j + 1];
 
     i = 0;
     j = 0;
-    k = p;
+    k = left;
 
+    // Compare elements from L and R
+    // and put them in correct location in main array
     while (i < n1 && j < n2)
     {
         if (L[i] <= R[j])
@@ -48,6 +57,7 @@ void merge(int A[], int p, int q, int r)
         k++;
     }
 
+    // Handling last element that hasn't been sorted yet
     while (i < n1)
     {
         A[k] = L[i];
@@ -62,17 +72,17 @@ void merge(int A[], int p, int q, int r)
     }
 }
 
-void mergeSort(int A[], int p, int r)
+void mergeSort(int A[], int left, int right)
 {
-    if (p >= r)
+    if (left >= right)
         return;
 
-    int q;
-    q = (p + r) / 2;
+    int mid;
+    mid = (left + right) / 2; // Find index of element in middle
 
-    mergeSort(A, p, q);
-    mergeSort(A, q + 1, r);
-    merge(A, p, q, r);
+    mergeSort(A, left, mid);      // Perform merge sort on first half of array
+    mergeSort(A, mid + 1, right); // Perform merge sort on second half of array
+    merge(A, left, mid, right);   // Merge the two halves
 }
 
 int main()

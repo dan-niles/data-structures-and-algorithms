@@ -1,4 +1,8 @@
 // Time complexity: O(n^2)
+// Space Complexity: O(1)
+
+// Insertion sort is a simple sorting algorithm that builds the final sorted array one item at a time.
+// It  places an unsorted element at its suitable place in each iteration.
 
 #include <iostream>
 using namespace std;

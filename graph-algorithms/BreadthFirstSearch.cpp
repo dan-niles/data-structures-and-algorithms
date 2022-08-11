@@ -1,21 +1,27 @@
+// Breadth-First Traversal (or Search) for a graph is similar to Breadth-First Traversal of a tree.
+// The only catch here is, that, unlike trees, graphs may contain cycles, so we may come to the same node again.
+// To avoid processing a node more than once, we use a boolean visited array.
+// For simplicity, it is assumed that all vertices are reachable from the starting vertex.
+// BFS uses a queue data structure for traversal.
+
 #include <bits/stdc++.h>
 using namespace std;
 
 class Graph
 {
-    int V; // No. of vertices
+    int n; // No. of vertices
     vector<list<int>> adj;
 
 public:
-    Graph(int V);
+    Graph(int n);
     void addEdge(int v, int w);
     void BFS(int s);
 };
 
-Graph::Graph(int V)
+Graph::Graph(int n)
 {
-    this->V = V;
-    adj.resize(V);
+    this->n = n;
+    adj.resize(n);
 }
 
 void Graph::addEdge(int v, int w)
@@ -27,7 +33,7 @@ void Graph::BFS(int s)
 {
     // Mark all the vertices as not visited
     vector<bool> visited;
-    visited.resize(V, false);
+    visited.resize(n, false);
 
     // Create a queue for BFS
     list<int> queue;
@@ -57,10 +63,8 @@ void Graph::BFS(int s)
     }
 }
 
-// Driver program to test methods of graph class
 int main()
 {
-    // Create a graph given in the above diagram
     Graph g(4);
     g.addEdge(0, 1);
     g.addEdge(0, 2);
@@ -69,8 +73,7 @@ int main()
     g.addEdge(2, 3);
     g.addEdge(3, 3);
 
-    cout << "Following is Breadth First Traversal "
-         << "(starting from vertex 2) \n";
+    cout << "Breadth First Traversal (starting from vertex 2)" << endl;
     g.BFS(2);
 
     return 0;

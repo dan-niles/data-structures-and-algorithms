@@ -53,7 +53,7 @@ int Queue::dequeue()
 {
     // Check if queue is empty
     if (isEmpty())
-        return NULL;
+        return -1;
 
     int x = arr[front];
     front = (front + 1) % capacity; // Shift front element pointer by 1
@@ -66,7 +66,7 @@ int Queue::dequeue()
 int Queue::peek()
 {
     if (isEmpty())
-        return NULL;
+        return -1;
 
     return arr[front];
 }

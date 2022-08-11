@@ -74,6 +74,14 @@ void heapify(vector<int> &heap, int i)
     // minHeapify(heap, i);
 }
 
+// Build heap in a bottom up manner
+void buildHeap(vector<int> &heap)
+{
+    int size = heap.size();
+    for (int i = size / 2 - 1; i >= 0; i--)
+        heapify(heap, i);
+}
+
 // Insert node into heap
 void insert(vector<int> &heap, int newNum)
 {

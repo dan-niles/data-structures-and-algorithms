@@ -72,6 +72,48 @@ void merge(int A[], int left, int mid, int right)
     }
 }
 
+// Time Complexity: O(n)
+void merge2(int A[], int left, int mid, int right)
+{
+    int n1, n2;
+    n1 = mid - left + 1; // No of elements in first half
+    n2 = right - mid;    // No of elements in second half
+
+    int L[n1 + 1], R[n2 + 1]; // Create two arrays to store both halves seperately
+    int i, j, k;
+
+    // Copy values from first half of array into L
+    for (i = 0; i < n1; i++)
+        L[i] = A[left + i];
+
+    // Copy values from second half of array into R
+    for (j = 0; j < n2; j++)
+        R[j] = A[mid + j + 1];
+
+    // Set last values as infinity to avoid
+    // handling remainders like in above Merge function
+    L[n1] = INT_MAX;
+    R[n2] = INT_MAX;
+
+    i = 0;
+    j = 0;
+    k = left;
+
+    for (k = left; k <= right; k++)
+    {
+        if (L[i] <= R[j])
+        {
+            A[k] = L[i];
+            i++;
+        }
+        else
+        {
+            A[k] = R[j];
+            j++;
+        }
+    }
+}
+
 void mergeSort(int A[], int left, int right)
 {
     if (left >= right)
@@ -82,7 +124,7 @@ void mergeSort(int A[], int left, int right)
 
     mergeSort(A, left, mid);      // Perform merge sort on first half of array
     mergeSort(A, mid + 1, right); // Perform merge sort on second half of array
-    merge(A, left, mid, right);   // Merge the two halves
+    merge2(A, left, mid, right);  // Merge the two halves
 }
 
 int main()
